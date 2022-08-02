@@ -5,54 +5,51 @@ import android.os.Bundle
 import android.view.View
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private val counters = mutableListOf(0, 0, 0)
+    private val presenter = MainPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonOne.setOnClickListener(clickListener)
-        binding.buttonTwo.setOnClickListener(clickListener)
-        binding.buttonThree.setOnClickListener(clickListener)
+        val listener = View.OnClickListener {
+            presenter.counterClick(it.id)
+        }
 
-        initView()
+        binding.buttonOne.setOnClickListener(listener)
+        binding.buttonTwo.setOnClickListener(listener)
+        binding.buttonThree.setOnClickListener(listener)
+
     }
 
-    private fun initView() {
-        binding.buttonOne.text = counters[0].toString()
-        binding.buttonTwo.text = counters[1].toString()
-        binding.buttonThree.text = counters[2].toString()
-    }
-
-    private var clickListener = View.OnClickListener { view ->
-        when (view.id) {
-            R.id.buttonOne -> {
-                binding.buttonOne.text = (++counters[0]).toString()
+    override fun setButtonText(index: Int, text: String) {
+        when (index) {
+            0 -> {
+                binding.buttonOne.text = text
             }
-            R.id.buttonTwo -> {
-                binding.buttonTwo.text = (++counters[1]).toString()
+            1 -> {
+                binding.buttonTwo.text = text
             }
-            R.id.buttonThree -> {
-                binding.buttonThree.text = (++counters[2]).toString()
+            2 -> {
+                binding.buttonThree.text = text
             }
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putIntArray("Array", counters.toIntArray())
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        savedInstanceState.getIntArray("Array")?.let {
-            counters.clear()
-            counters.addAll(it.toMutableList())
-            initView()
-        }
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putIntArray("Array", counters.toIntArray())
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        savedInstanceState.getIntArray("Array")?.let {
+//            counters.clear()
+//            counters.addAll(it.toMutableList())
+//            initView()
+//        }
+//    }
 }
