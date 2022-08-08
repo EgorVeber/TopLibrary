@@ -6,42 +6,8 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textViewOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/counter1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonOne"
-        android:layout_marginBottom="@dimen/marginBtnEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_1" />
-
-    <TextView
-        android:id="@+id/textViewTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/counter2" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/marginBtnEnd"
-        android:text="@string/_1" />
-
-    <TextView
-        android:id="@+id/textViewThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/counter3" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_1" />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvGithubUser"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
