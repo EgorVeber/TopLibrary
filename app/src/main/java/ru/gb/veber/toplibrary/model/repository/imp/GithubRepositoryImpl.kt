@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.repository.imp
+package ru.gb.veber.toplibrary.model.repository.imp
 
 import ru.gb.veber.toplibrary.model.GithubUser
 

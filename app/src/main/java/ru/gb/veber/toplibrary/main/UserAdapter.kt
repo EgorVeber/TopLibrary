@@ -1,4 +1,5 @@
 package ru.gb.veber.toplibrary.main
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import ru.gb.veber.toplibrary.model.GithubUser
 
 class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
 
-     var users: List<GithubUser> = emptyList()
+    var users: List<GithubUser> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,7 +32,6 @@ class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
 class GithubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     //val binding = ItemUserBinding.inflate(LayoutInflater.from(itemView.context))
-
 
     private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.tvUserLogin) }
     //при обращзении будет вызыватся иициализировнная view

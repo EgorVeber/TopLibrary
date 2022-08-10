@@ -6,8 +6,8 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".main.MainActivity">
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGithubUser"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
