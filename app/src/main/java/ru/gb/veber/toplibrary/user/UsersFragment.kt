@@ -14,19 +14,25 @@ import ru.gb.veber.toplibrary.main.UserAdapter
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.model.repository.imp.GithubRepositoryImpl
 
-class UserFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
+class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
-    private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(GithubRepositoryImpl(),
+    private val presenter: UsersPresenter by moxyPresenter {
+        UsersPresenter(GithubRepositoryImpl(),
             App.instance.router)
     }
+
+    private val listener = object : ItemClickListener {
+        override fun onUserClick(user: GithubUser) {
+            presenter.openUserScreen(user)
+        }
+    }
+
     private val userAdapter = UserAdapter()
     private lateinit var binding: FragmentUserListBinding
 
     companion object {
-        //Передать аргументы
-        fun getInstance(): UserFragment {
-            return UserFragment()
+        fun getInstance(): UsersFragment {
+            return UsersFragment()
         }
     }
 
@@ -42,8 +48,10 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userAdapter.setOnUserClickListener(listener)
         binding.rvGithubUser.adapter = userAdapter
         binding.rvGithubUser.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     override fun initList(list: List<GithubUser>) {
@@ -51,4 +59,5 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
+
 }

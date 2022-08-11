@@ -9,3 +9,7 @@ import ru.gb.veber.toplibrary.model.GithubUser
 interface UserView : MvpView {
     fun initList(list: List<GithubUser>)
 }
+
+interface ItemClickListener {
+    fun onUserClick(user: GithubUser)
+}
