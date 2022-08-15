@@ -12,7 +12,7 @@ import ru.gb.veber.toplibrary.presenter.UserPresenter
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
 
 
-class UserDetailsFragment : MvpAppCompatFragment(), UserScreenView, BackPressedListener {
+class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressedListener {
 
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(App.instance.router, arguments?.getParcelable(KEY_USER))

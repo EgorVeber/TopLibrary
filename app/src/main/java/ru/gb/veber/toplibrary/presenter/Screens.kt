@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.core.navigator
+package ru.gb.veber.toplibrary.presenter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
