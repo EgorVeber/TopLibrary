@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.usercreen
+package ru.gb.veber.toplibrary.view.userdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.App
-import ru.gb.veber.toplibrary.core.BackPressedListener
+import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
+import ru.gb.veber.toplibrary.presenter.UserPresenter
+import ru.gb.veber.toplibrary.view.main.BackPressedListener
 
 
-class UserScreenFragment : MvpAppCompatFragment(), UserScreenView, BackPressedListener {
+class UserDetailsFragment : MvpAppCompatFragment(), UserScreenView, BackPressedListener {
 
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(App.instance.router, arguments?.getParcelable(KEY_USER))
@@ -21,7 +22,7 @@ class UserScreenFragment : MvpAppCompatFragment(), UserScreenView, BackPressedLi
 
     companion object {
         const val KEY_USER = "KEY_USER"
-        fun newInstance(bundle: Bundle) = UserScreenFragment().apply { arguments = bundle }
+        fun newInstance(bundle: Bundle) = UserDetailsFragment().apply { arguments = bundle }
     }
 
     override fun onCreateView(

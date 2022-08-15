@@ -4,7 +4,7 @@
     package="ru.gb.veber.toplibrary">
 
     <application
-        android:name=".App"
+        android:name=".core.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TopLibrary"
         tools:targetApi="31">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

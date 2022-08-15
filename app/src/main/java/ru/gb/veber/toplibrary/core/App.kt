@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary
+package ru.gb.veber.toplibrary.core
 
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone

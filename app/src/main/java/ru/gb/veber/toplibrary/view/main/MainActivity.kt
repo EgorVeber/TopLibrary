@@ -1,14 +1,13 @@
-package ru.gb.veber.toplibrary.main
+package ru.gb.veber.toplibrary.view.main
 
 import android.os.Bundle
-import android.util.Log
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.App
 import ru.gb.veber.toplibrary.R
-import ru.gb.veber.toplibrary.core.BackPressedListener
+import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
+import ru.gb.veber.toplibrary.presenter.MainPresenter
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 

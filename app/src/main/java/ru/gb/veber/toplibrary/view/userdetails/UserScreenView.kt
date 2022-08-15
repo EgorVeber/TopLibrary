@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.usercreen
+package ru.gb.veber.toplibrary.view.userdetails
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

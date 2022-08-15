@@ -1,8 +1,9 @@
-package ru.gb.veber.toplibrary.usercreen
+package ru.gb.veber.toplibrary.presenter
 
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.view.userdetails.UserScreenView
 
 class UserPresenter(
     private val router: Router,
