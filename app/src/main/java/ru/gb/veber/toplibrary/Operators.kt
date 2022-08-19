@@ -1,7 +1,6 @@
 package ru.gb.veber.toplibrary
 
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 

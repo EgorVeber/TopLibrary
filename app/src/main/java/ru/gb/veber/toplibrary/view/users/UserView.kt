@@ -8,6 +8,9 @@ import ru.gb.veber.toplibrary.model.GithubUser
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserView : MvpView {
     fun initList(list: List<GithubUser>)
+    fun showLoading()
+    fun hideLoading()
+    fun errorGetUser(message: String?)
 }
 
 interface ItemClickListener {

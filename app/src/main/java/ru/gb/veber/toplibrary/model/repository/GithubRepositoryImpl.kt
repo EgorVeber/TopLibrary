@@ -1,6 +1,8 @@
 package ru.gb.veber.toplibrary.model.repository
 
+import io.reactivex.rxjava3.core.Observable
 import ru.gb.veber.toplibrary.model.GithubUser
+import java.util.concurrent.TimeUnit
 
 class GithubRepositoryImpl : GithubRepository {
     private val repositories = listOf(
@@ -11,7 +13,7 @@ class GithubRepositoryImpl : GithubRepository {
         GithubUser("User5")
     )
 
-   override fun getUsers(): List<GithubUser> {
-        return repositories
+    override fun getUsers(): Observable<List<GithubUser>> {
+        return Observable.fromIterable(listOf(repositories)).delay(1,TimeUnit.SECONDS)
     }
 }
