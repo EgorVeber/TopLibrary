@@ -11,13 +11,11 @@ import kotlin.random.Random.Default.nextInt
 
 class Creation {
 
-
     fun exec() {
         Consumer(Producer()).exec()
     }
 
     inner class Producer {
-
 
         fun randomResultOperation(): Boolean {
             Thread.sleep(1000)
@@ -115,7 +113,6 @@ class Creation {
 //                println("onNext:$s")
 //            }, { e ->
 //                println("onError ${e.message}")
-//
 //            }, { println("onComplete") })
         }
     }

@@ -13,31 +13,28 @@ class Operators {
     class Producer {
         fun createJust() = Observable.just("1", "2", "3", "3")
         fun createJust2() = Observable.just("4", "5", "6")
+        fun fromIterable(): Observable<Int> =
+            Observable.fromIterable(listOf(2, 1, 3, 4, 5, 1, 23, 13, 3))
     }
 
     class Consumer(val producer: Producer) {
 
         fun exec() {
             //execTake()
-            execFlatMap()
+            //execFlatMap()
+            //execMap()
+            execZip()
         }
 
         fun execZip() {
-            val observable1 = Observable.just("1").delay(1, TimeUnit.SECONDS)
-            val observable2 = Observable.just("2").delay(2, TimeUnit.SECONDS)
-            val observable3 = Observable.just("3").delay(4, TimeUnit.SECONDS)
-            val observable4 = Observable.just("4").delay(6, TimeUnit.SECONDS)
+            val observable1 = Observable.just("1", "2", "3")
+            val observable2 = Observable.just("Mack", "James", "Dima")
 
-//            Observable.zip(observable1, observable2, observable3, observable4,
-//                Function4<String, String, String, String, List<String>> { t1, t2, t3, t4 ->
-//                    return@Function4 listOf(t1, t2, t3, t4)
-//                })
-//                .subscribeOn(Schedulers.computation())
-//                .subscribe({
-//                    println("Zip result: $it")
-//                }, {
-//                    println("onError: ${it.message}")
-//                })
+            Observable.zip(observable1, observable2) { num, name ->
+                num + name
+            }.subscribe({
+                println(it)
+            }, {}, {})
         }
 
 
@@ -55,6 +52,17 @@ class Operators {
                 })
         }
 
+        private fun mapToListAdd(value: Int): MutableList<Int> {
+            return mutableListOf(value, 11)
+        }
+
+        fun execMap() {
+            producer.fromIterable().map(::mapToListAdd).map {
+                it[0] + 1
+            }.subscribe {
+                println(it)
+            }
+        }
 
         fun execTake() {
             //flatMap возвращает observable
