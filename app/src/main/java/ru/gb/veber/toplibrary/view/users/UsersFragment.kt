@@ -1,6 +1,8 @@
 package ru.gb.veber.toplibrary.view.users
 
 import android.os.Bundle
+import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,8 @@ import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
 import ru.gb.veber.toplibrary.presenter.UsersPresenter
+import ru.gb.veber.toplibrary.utils.hide
+import ru.gb.veber.toplibrary.utils.show
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
 
 class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
@@ -55,8 +59,22 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
     }
 
     override fun initList(list: List<GithubUser>) {
+        TransitionManager.beginDelayedTransition(binding.root)
         userAdapter.users = list
     }
+
+    override fun showLoading() {
+        binding.progressBarList.show()
+    }
+
+    override fun hideLoading() {
+        binding.progressBarList.hide()
+    }
+
+    override fun errorGetUser(message: String?) {
+        Log.d("TAG", "errorGetUser() called with: message = $message")
+    }
+
     override fun onBackPressed() = presenter.onBackPressed()
 
 }
