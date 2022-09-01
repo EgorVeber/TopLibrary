@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import ru.gb.veber.toplibrary.BuildConfig
 import ru.gb.veber.toplibrary.R
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding

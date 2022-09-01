@@ -1,19 +1,17 @@
 package ru.gb.veber.toplibrary.model.repository
 
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.network.UsersApi
+import ru.gb.veber.toplibrary.utils.mapToEntity
 import java.util.concurrent.TimeUnit
 
-class GithubRepositoryImpl : GithubRepository {
-    private val repositories = listOf(
-        GithubUser("User1"),
-        GithubUser("User2"),
-        GithubUser("User3"),
-        GithubUser("User4"),
-        GithubUser("User5")
-    )
+class GithubRepositoryImpl(private val usersApi: UsersApi) : GithubRepository {
+    override fun getUsers(): Single<List<GithubUser>> {
+        return usersApi.getAllUsers().map { it.map(::mapToEntity) }.delay(1,TimeUnit.SECONDS)
+    }
 
-    override fun getUsers(): Observable<List<GithubUser>> {
-        return Observable.fromIterable(listOf(repositories)).delay(1, TimeUnit.SECONDS)
+    override fun getUsersById(login: String): Single<GithubUser> {
+        return usersApi.getUser(login).map(::mapToEntity).delay(1,TimeUnit.SECONDS)
     }
 }

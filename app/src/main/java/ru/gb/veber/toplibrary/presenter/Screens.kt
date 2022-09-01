@@ -15,10 +15,8 @@ object UsersScreen : FragmentScreen {
     }
 }
 
-data class UserScreen(private val user: GithubUser) : FragmentScreen {
+data class UserScreen(private val userLogin: String) : FragmentScreen {
     override fun createFragment(factory: FragmentFactory): Fragment {
-        return UserDetailsFragment.newInstance(Bundle().apply {
-            putParcelable(KEY_USER, user)
-        })
+        return UserDetailsFragment.newInstance(userLogin)
     }
 }

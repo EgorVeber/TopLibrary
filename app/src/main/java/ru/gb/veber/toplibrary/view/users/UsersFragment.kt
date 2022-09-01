@@ -1,6 +1,5 @@
 package ru.gb.veber.toplibrary.view.users
 
-import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.util.Log
@@ -10,11 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.BuildConfig
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
+import ru.gb.veber.toplibrary.network.NetworkProvider
 import ru.gb.veber.toplibrary.presenter.UsersPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.show
@@ -22,18 +21,24 @@ import ru.gb.veber.toplibrary.view.main.BackPressedListener
 
 class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
+
+    private val userAdapter = UserAdapter {
+        presenter.openUserScreen(it)
+    }
+
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubRepositoryImpl(),
+        UsersPresenter(GithubRepositoryImpl(NetworkProvider.usersApi),
             App.instance.router)
     }
 
-    private val listener = object : ItemClickListener {
-        override fun onUserClick(user: GithubUser) {
-            presenter.openUserScreen(user)
-        }
-    }
 
-    private val userAdapter = UserAdapter()
+//    private val listener = object : ItemClickListener {
+//        override fun onUserClick(userLogin: String) {
+//            presenter.openUserScreen(userLogin)
+//        }
+//    }
+
+
     private lateinit var binding: FragmentUserListBinding
 
     companion object {
@@ -54,7 +59,7 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userAdapter.setOnUserClickListener(listener)
+        //userAdapter.setOnUserClickListener(listener)
         binding.rvGithubUser.adapter = userAdapter
         binding.rvGithubUser.layoutManager = LinearLayoutManager(requireContext())
     }
