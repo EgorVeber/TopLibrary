@@ -29,4 +29,5 @@ object NetworkProvider {
             .build()
 
     fun createClient() = OkHttpClient.Builder().build()
+
 }

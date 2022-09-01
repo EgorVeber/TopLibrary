@@ -3,8 +3,6 @@ package ru.gb.veber.toplibrary.view.users
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import ru.gb.veber.toplibrary.R
 import ru.gb.veber.toplibrary.databinding.ItemUserBinding
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.utils.loadGlide
@@ -29,7 +27,9 @@ class UserAdapter(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
-        return GithubUserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context)),
+        return GithubUserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false),
             onUserClickListener)
     }
 

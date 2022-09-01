@@ -5,31 +5,32 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
-import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.model.GithubUserRepos
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
 import ru.gb.veber.toplibrary.network.NetworkProvider
-import ru.gb.veber.toplibrary.presenter.UserPresenter
-import ru.gb.veber.toplibrary.presenter.UsersPresenter
+import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.loadGlide
 import ru.gb.veber.toplibrary.utils.show
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
+import ru.gb.veber.toplibrary.view.users.UserAdapter
 
 
 class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressedListener {
 
-    private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(App.instance.router,
+
+    private val reposAdapter = ReposAdapter {
+
+    }
+
+
+    private val presenter: UserDetailsPresenter by moxyPresenter {
+        UserDetailsPresenter(App.instance.router,
             GithubRepositoryImpl(NetworkProvider.usersApi))
     }
 
@@ -59,14 +60,19 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
         arguments?.getString(KEY_USER)?.let {
             presenter.loadUser(it)
         }
+
+        binding?.rvGithubUserRepos?.adapter = reposAdapter
+        binding?.rvGithubUserRepos?.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
 
-    override fun showUser(user: GithubUser) {
+    override fun showUser(user: GithubUserRepos) {
         TransitionManager.beginDelayedTransition(binding?.root)
-        binding?.userName?.text = user.login
-        binding?.ivUserAvatar?.loadGlide(user.avatarUrl)
+        binding?.userName?.text = user.user.login
+        binding?.ivUserAvatar?.loadGlide(user.user.avatarUrl)
+        reposAdapter.repos = user.reposList
     }
 
     override fun showLoading() {
