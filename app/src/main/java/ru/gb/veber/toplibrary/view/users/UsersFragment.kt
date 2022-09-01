@@ -1,5 +1,6 @@
 package ru.gb.veber.toplibrary.view.users
 
+import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.gb.veber.toplibrary.BuildConfig
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
 import ru.gb.veber.toplibrary.model.GithubUser
@@ -55,7 +57,6 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
         userAdapter.setOnUserClickListener(listener)
         binding.rvGithubUser.adapter = userAdapter
         binding.rvGithubUser.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
     override fun initList(list: List<GithubUser>) {
@@ -76,5 +77,4 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
-
 }

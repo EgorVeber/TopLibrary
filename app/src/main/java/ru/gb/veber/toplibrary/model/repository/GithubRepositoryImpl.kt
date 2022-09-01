@@ -14,6 +14,6 @@ class GithubRepositoryImpl : GithubRepository {
     )
 
     override fun getUsers(): Observable<List<GithubUser>> {
-        return Observable.fromIterable(listOf(repositories)).delay(1,TimeUnit.SECONDS)
+        return Observable.fromIterable(listOf(repositories)).delay(1, TimeUnit.SECONDS)
     }
 }
