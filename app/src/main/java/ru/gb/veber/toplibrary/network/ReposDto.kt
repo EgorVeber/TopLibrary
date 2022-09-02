@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class ReposDto(
     @Expose
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
 
     @Expose
     @SerializedName("node_id")
@@ -26,7 +26,7 @@ data class ReposDto(
 
     @Expose
     @SerializedName("created_at")
-    val createdAt: String,
+    var createdAt: String,
 
     @Expose
     @SerializedName("updated_at")

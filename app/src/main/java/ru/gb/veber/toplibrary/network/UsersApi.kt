@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface UsersApi {
+
     @GET("/users")
     fun getAllUsers(): Single<List<UsersDto>>
 
@@ -13,5 +14,4 @@ interface UsersApi {
 
     @GET("/users/{login}/repos")
     fun getRepos(@Path("login") login: String): Single<List<ReposDto>>
-
 }

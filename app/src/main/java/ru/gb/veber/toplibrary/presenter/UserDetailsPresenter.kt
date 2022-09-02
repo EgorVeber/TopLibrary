@@ -9,6 +9,8 @@ import ru.gb.veber.toplibrary.model.GithubUserRepos
 import ru.gb.veber.toplibrary.model.repository.GithubRepository
 import ru.gb.veber.toplibrary.network.ReposDto
 import ru.gb.veber.toplibrary.utils.disposebleBy
+import ru.gb.veber.toplibrary.utils.formatDefault
+import ru.gb.veber.toplibrary.utils.stringFromData
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView
 
@@ -29,7 +31,13 @@ class UserDetailsPresenter(
         viewState.showLoading()
         Single.zip(repository.getUserByLogin(login),
             repository.getReposByLogin(login)) { user, repos ->
-            GithubUserRepos(user, repos.sortedByDescending { it.createdAt })
+
+            repos.sortedByDescending { it.createdAt }.map {
+                it.createdAt = it.createdAt.substring(0, 10)
+                it
+            }
+
+            GithubUserRepos(user, repos)
         }.subscribeByDefault().subscribe({
             viewState.hideLoading()
             viewState.showUser(it)
@@ -40,7 +48,7 @@ class UserDetailsPresenter(
 
     fun onBackPressed(): Boolean {
         mLogin?.let {
-            router.navigateTo(UserScreen(it))
+            router.backTo(UserScreen(it))
         }
         return true
     }

@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/nameRepo"
-        android:textSize="18sp"
         android:layout_width="wrap_content"
-        tools:text="asdasd"
         android:layout_height="wrap_content"
+        android:fontFamily="More Fonts..."
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="asdasd" />
 
     <TextView
         android:id="@+id/dateCreating"

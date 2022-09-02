@@ -8,7 +8,13 @@ import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.R
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
+import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.model.GithubUserRepos
+import ru.gb.veber.toplibrary.network.ReposDto
 import ru.gb.veber.toplibrary.presenter.MainPresenter
+import ru.gb.veber.toplibrary.utils.formatDefault
+import ru.gb.veber.toplibrary.utils.stringFromData
+import kotlin.math.log
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
@@ -20,7 +26,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
     }
 
