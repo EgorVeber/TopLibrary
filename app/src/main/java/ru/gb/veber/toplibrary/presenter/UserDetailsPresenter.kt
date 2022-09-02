@@ -5,12 +5,10 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
-import ru.gb.veber.toplibrary.model.GithubUserRepos
+import ru.gb.veber.toplibrary.model.data.GithubUser
 import ru.gb.veber.toplibrary.model.repository.GithubRepository
-import ru.gb.veber.toplibrary.network.ReposDto
+import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.utils.disposebleBy
-import ru.gb.veber.toplibrary.utils.formatDefault
-import ru.gb.veber.toplibrary.utils.stringFromData
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView
 
@@ -37,7 +35,7 @@ class UserDetailsPresenter(
                 it
             }
 
-            GithubUserRepos(user, repos)
+            Pair<GithubUser, List<ReposDto>>(user,repos)
         }.subscribeByDefault().subscribe({
             viewState.hideLoading()
             viewState.showUser(it)

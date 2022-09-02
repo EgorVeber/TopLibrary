@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.network
+package ru.gb.veber.toplibrary.model.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

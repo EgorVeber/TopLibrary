@@ -1,8 +1,7 @@
-package ru.gb.veber.toplibrary.model
+package ru.gb.veber.toplibrary.model.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import ru.gb.veber.toplibrary.network.ReposDto
 
 @Parcelize
 data class GithubUser(
@@ -10,11 +9,5 @@ data class GithubUser(
     val login: String,
     val avatarUrl:String?,
     val reposUrl:String?,
-) : Parcelable
-
-
-@Parcelize
-data class GithubUserRepos(
-    val user:GithubUser,
-    var reposList:List<ReposDto>
+    var repos:List<ReposDto>?=null
 ) : Parcelable

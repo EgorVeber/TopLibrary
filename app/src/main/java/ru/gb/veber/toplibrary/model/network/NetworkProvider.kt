@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.network
+package ru.gb.veber.toplibrary.model.network
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

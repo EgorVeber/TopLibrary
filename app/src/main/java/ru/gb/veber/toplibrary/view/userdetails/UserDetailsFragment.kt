@@ -10,9 +10,10 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
-import ru.gb.veber.toplibrary.model.GithubUserRepos
+import ru.gb.veber.toplibrary.model.data.GithubUser
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
-import ru.gb.veber.toplibrary.network.NetworkProvider
+import ru.gb.veber.toplibrary.model.network.NetworkProvider
+import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.loadGlide
@@ -30,7 +31,8 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(App.instance.router,
-            GithubRepositoryImpl(NetworkProvider.usersApi))
+            GithubRepositoryImpl(NetworkProvider.usersApi, App.instance.database.userDao(),
+                App.instance.getConnectSingle()))
     }
 
     private var binding: FragmentUserScreenBinding? = null
@@ -67,11 +69,11 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
 
     override fun onBackPressed() = presenter.onBackPressed()
 
-    override fun showUser(user: GithubUserRepos) {
+    override fun showUser(user: Pair<GithubUser, List<ReposDto>>) {
         TransitionManager.beginDelayedTransition(binding?.root)
-        binding?.userName?.text = user.user.login
-        binding?.ivUserAvatar?.loadGlide(user.user.avatarUrl)
-        reposAdapter.repos = user.reposList
+        binding?.userName?.text = user.first.login
+        binding?.ivUserAvatar?.loadGlide(user.first.avatarUrl)
+        reposAdapter.repos = user.second
     }
 
     override fun showLoading() {
@@ -79,6 +81,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
             progressBar.show()
             userName.hide()
             ivUserAvatar.hide()
+            rvGithubUserRepos.hide()
         }
     }
 
@@ -87,6 +90,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
             progressBar.hide()
             userName.show()
             ivUserAvatar.show()
+            rvGithubUserRepos.show()
         }
     }
 
