@@ -1,11 +1,9 @@
 package ru.gb.veber.toplibrary.model.repository
 
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.network.ReposDto
 import ru.gb.veber.toplibrary.network.UsersApi
-import ru.gb.veber.toplibrary.network.UsersDto
 import ru.gb.veber.toplibrary.utils.mapToEntity
 import java.util.concurrent.TimeUnit
 

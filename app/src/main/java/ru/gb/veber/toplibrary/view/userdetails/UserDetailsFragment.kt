@@ -18,14 +18,13 @@ import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.loadGlide
 import ru.gb.veber.toplibrary.utils.show
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
-import ru.gb.veber.toplibrary.view.users.UserAdapter
 
 
 class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressedListener {
 
 
     private val reposAdapter = ReposAdapter {
-
+        presenter.openRepoScreen(it)
     }
 
 

@@ -4,14 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.veber.toplibrary.databinding.ItemReposBinding
-import ru.gb.veber.toplibrary.databinding.ItemUserBinding
-import ru.gb.veber.toplibrary.model.GithubUser
-import ru.gb.veber.toplibrary.model.GithubUserRepos
 import ru.gb.veber.toplibrary.network.ReposDto
-import ru.gb.veber.toplibrary.utils.loadGlide
 
 
-typealias OnUserClickListener = (login: String) -> Unit
+typealias OnUserClickListener = (repo: ReposDto) -> Unit
 
 class ReposAdapter(
     private val onUserClickListener: OnUserClickListener,
@@ -49,7 +45,7 @@ class GithubUserReposViewHolder(
         dateCreating.text=item.createdAt
 
         root.setOnClickListener {
-           // onUserClickListener.invoke(item.login)
+           onUserClickListener.invoke(item)
         }
     }
 }

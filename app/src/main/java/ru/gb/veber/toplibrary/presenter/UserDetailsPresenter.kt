@@ -7,6 +7,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import ru.gb.veber.toplibrary.model.GithubUserRepos
 import ru.gb.veber.toplibrary.model.repository.GithubRepository
+import ru.gb.veber.toplibrary.network.ReposDto
 import ru.gb.veber.toplibrary.utils.disposebleBy
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView
@@ -18,12 +19,13 @@ class UserDetailsPresenter(
 
 
     private val bag = CompositeDisposable()
-
+    private var mLogin: String? = null
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
     }
 
     fun loadUser(login: String) {
+        mLogin = login
         viewState.showLoading()
         Single.zip(repository.getUserByLogin(login),
             repository.getReposByLogin(login)) { user, repos ->
@@ -37,8 +39,14 @@ class UserDetailsPresenter(
     }
 
     fun onBackPressed(): Boolean {
-        router.exit()
+        mLogin?.let {
+            router.navigateTo(UserScreen(it))
+        }
         return true
+    }
+
+    fun openRepoScreen(repo: ReposDto) {
+        router.navigateTo(RepoScreen(repo))
     }
 
     override fun onDestroy() {
