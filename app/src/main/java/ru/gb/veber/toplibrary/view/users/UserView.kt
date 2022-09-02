@@ -14,5 +14,5 @@ interface UserView : MvpView {
 }
 
 interface ItemClickListener {
-    fun onUserClick(user: GithubUser)
+    fun onUserClick(userLogin: String)
 }

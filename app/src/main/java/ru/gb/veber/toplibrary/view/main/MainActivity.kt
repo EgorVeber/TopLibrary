@@ -1,6 +1,7 @@
 package ru.gb.veber.toplibrary.view.main
 
 import android.os.Bundle
+import android.util.Log
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

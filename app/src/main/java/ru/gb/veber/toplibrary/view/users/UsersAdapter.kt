@@ -5,14 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.veber.toplibrary.databinding.ItemUserBinding
 import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.utils.loadGlide
 
-class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
 
-    private lateinit var userClick: ItemClickListener
+typealias OnUserClickListener = (login: String) -> Unit
 
-    fun setOnUserClickListener(listener: ItemClickListener) {
-        userClick = listener
-    }
+class UserAdapter(
+    private val onUserClickListener: OnUserClickListener,
+) : RecyclerView.Adapter<GithubUserViewHolder>() {
+
+//    private lateinit var userClick: ItemClickListener
+//
+//    fun setOnUserClickListener(listener: ItemClickListener) {
+//        userClick = listener
+//    }
 
     var users: List<GithubUser> = emptyList()
         set(value) {
@@ -21,8 +27,10 @@ class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
-        return GithubUserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context)),
-            userClick)
+        return GithubUserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false),
+            onUserClickListener)
     }
 
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
@@ -32,12 +40,19 @@ class UserAdapter() : RecyclerView.Adapter<GithubUserViewHolder>() {
     override fun getItemCount() = users.size
 }
 
-class GithubUserViewHolder(private val binding: ItemUserBinding, private val userClick: ItemClickListener) :
-    RecyclerView.ViewHolder(binding.root) {
+class GithubUserViewHolder(
+    private val binding: ItemUserBinding,
+    private val onUserClickListener: OnUserClickListener,
+) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(item: GithubUser) = with(binding) {
+
         tvUserLogin.text = item.login
-        itemView.setOnClickListener {
-            userClick.onUserClick(item)
+
+        ivUserAvatar.loadGlide(item.avatarUrl)
+
+        root.setOnClickListener {
+            onUserClickListener.invoke(item.login)
         }
     }
 }
