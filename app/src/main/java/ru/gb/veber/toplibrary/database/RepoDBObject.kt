@@ -2,7 +2,6 @@ package ru.gb.veber.toplibrary.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 
@@ -16,12 +15,17 @@ import androidx.room.PrimaryKey
 //)])
 
 @Entity(tableName = "repos")
-class RepoDBObject(
+data class RepoDBObject(
     @PrimaryKey
     @ColumnInfo(name = PRIMARY_KEY) // можно менять название
     val id: Int,
-    val forks: Int,
-    val name: String,
+    val forks: Int?=null,
+    val name: String?=null,
+    val nodeId: String?=null,
+    val description: String?=null,
+    var createdAt: String?=null,
+    val updatedAt: String?=null,
+    val language: String?=null,
     @ColumnInfo(name = FOREIGN_USER_KEY)
     val userId: Int,
 ) {

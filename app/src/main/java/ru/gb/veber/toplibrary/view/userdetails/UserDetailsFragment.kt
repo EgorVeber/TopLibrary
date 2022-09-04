@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.gb.veber.toplibrary.core.AndroidNetworkStatus
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
 import ru.gb.veber.toplibrary.model.data.GithubUser
-import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
-import ru.gb.veber.toplibrary.model.network.NetworkProvider
 import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.network.NetworkProvider
+import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
 import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.loadGlide
@@ -32,7 +33,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
     private val presenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(App.instance.router,
             GithubRepositoryImpl(NetworkProvider.usersApi, App.instance.database.userDao(),
-                App.instance.getConnectSingle()))
+                AndroidNetworkStatus(requireContext()).isOnlineSingle()))
     }
 
     private var binding: FragmentUserScreenBinding? = null

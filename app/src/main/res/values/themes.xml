@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyThemeBaseTeal" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="MyThemeBaseTeal" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="android:navigationBarColor">@color/teal_500</item>
         <item name="colorPrimary">@color/teal_600</item>
@@ -31,7 +31,6 @@
         <item name="colorTertiaryContainer">@color/teal_100</item>
         <item name="colorOnTertiaryContainer">@color/teal_900</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/t700</item>
-
 
         <item name="textAppearanceCaption">@style/MyTextAppearanceCaption</item>
         <item name="textAppearanceSubtitle1">@style/MytTextAppearanceSubtitle1</item>

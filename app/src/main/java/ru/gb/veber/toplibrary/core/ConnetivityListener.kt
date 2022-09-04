@@ -3,13 +3,15 @@ package com.mirkhusainov.geekbrainscourse.core.utils
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
+import android.util.Log
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
 
 class ConnetivityListener(connectivityManager: ConnectivityManager) {
 
-    private val subject = PublishSubject.create<Boolean>()
+    private val subject = BehaviorSubject.create<Boolean>()
 
     init {
         val request = NetworkRequest.Builder().build()
@@ -32,3 +34,5 @@ class ConnetivityListener(connectivityManager: ConnectivityManager) {
 
     fun statusSingle(): Single<Boolean> = subject.first(false)
 }
+
+

@@ -1,8 +1,8 @@
 package ru.gb.veber.toplibrary.model.repository
 
+import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import ru.gb.veber.toplibrary.database.UserDAO
-import ru.gb.veber.toplibrary.database.UserWithReposDBObject
 import ru.gb.veber.toplibrary.model.data.GithubUser
 import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.model.network.UsersApi
@@ -22,11 +22,38 @@ class GithubRepositoryImpl(
         }
     }
 
-    override fun getUserByLogin(login: String): Single<GithubUser> {
+    override fun getUserWithReposByLogin(login: String): Single<Pair<GithubUser, List<ReposDto>>> {
+        return networkStatus.flatMap { hasConnection ->
+            if (hasConnection) {
+                getZip(login)
+            } else {
+                getUserWithRepos(login)
+            }
+        }
+    }
+
+
+    fun getZip(login: String) =
+        Single.zip(getUserByLogin(login),
+            getReposByLogin(login)) { user, repos ->
+            repos.map {
+                it.createdAt = it.createdAt?.substring(0, 10)
+                it
+            }
+            Log.d("TAG", "getZip() called with: user = $user, repos = $repos")
+            Pair<GithubUser, List<ReposDto>>(user,
+                repos.sortedByDescending { it.createdAt })
+        }.doCompletableIf(true) { pair ->
+            userDao.insertAllRepos(pair.second.map {
+                mapReposToObject(it, pair.first.id)
+            })
+        }
+
+    fun getUserByLogin(login: String): Single<GithubUser> {
         return usersApi.getUser(login).map(::mapToEntity).delay(500, TimeUnit.MILLISECONDS)
     }
 
-    override fun getReposByLogin(login: String): Single<List<ReposDto>> {
+    fun getReposByLogin(login: String): Single<List<ReposDto>> {
         return usersApi.getRepos(login)
     }
 
@@ -40,18 +67,14 @@ class GithubRepositoryImpl(
         return userDao.queryForAllUsers().map { it.map(::mapToEntity) }
     }
 
-    override fun getUserWithRepos(login: String): Single<GithubUser> {
-        return userDao.getUsersWithRepos(login).map {userWithRepos->
+    override fun getUserWithRepos(login: String): Single<Pair<GithubUser, List<ReposDto>>> {
+        return userDao.getUsersWithRepos(login).map { userWithRepos ->
             val user = mapToEntity(userWithRepos.userDbObject)
-            user.repos = userWithRepos.repos.map { mapRepos(it) }
-            user
+            user.repos = userWithRepos.repos.map {
+                it.createdAt = it.createdAt?.substring(0, 10)
+                mapRepos(it)
+            }
+            Pair(user, user.repos!!.sortedByDescending { it.createdAt })
         }
     }
-
-
-    //    private fun fetchFromApi(shouldPersist: Boolean): Single<List<GithubUser>> {
-//        return usersApi.getAllUsers().flatMap {
-//            userDao.insertAll(it.map(::mapToDBObject)).andThen(Single.just(it))
-//        }.map { it.map(::mapToEntity) }
-//    }
 }

@@ -12,6 +12,7 @@ abstract class GithubDB : RoomDatabase() {
 
     companion object {
         fun create(context: Context): GithubDB {
+            //fallbackToDestructiveMigration()
             return Room.databaseBuilder(context, GithubDB::class.java, "github.db").build()
         }
     }
