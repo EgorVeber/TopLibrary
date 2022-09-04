@@ -7,5 +7,4 @@ import ru.gb.veber.toplibrary.model.data.ReposDto
 interface GithubRepository {
     fun getUsers(): Single<List<GithubUser>>
     fun getUserWithReposByLogin(login: String): Single<Pair<GithubUser, List<ReposDto>>>
-    fun checkStatusNetwork(): Single<Boolean>
 }

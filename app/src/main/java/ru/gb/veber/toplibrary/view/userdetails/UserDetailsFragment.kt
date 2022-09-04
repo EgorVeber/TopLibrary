@@ -81,6 +81,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
     }
 
     override fun showLoading() {
+        TransitionManager.beginDelayedTransition(binding?.root)
         binding?.apply {
             progressBar.show()
             userName.hide()
@@ -91,6 +92,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
     }
 
     override fun hideLoading() {
+        TransitionManager.beginDelayedTransition(binding?.root)
         binding?.apply {
             progressBar.hide()
             userName.show()

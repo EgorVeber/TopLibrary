@@ -1,9 +1,9 @@
 package ru.gb.veber.toplibrary.model.repository
 
 import io.reactivex.rxjava3.core.Single
-import ru.gb.veber.toplibrary.model.database.UserDAO
 import ru.gb.veber.toplibrary.model.data.GithubUser
 import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.database.UserDAO
 import ru.gb.veber.toplibrary.model.network.UsersApi
 import ru.gb.veber.toplibrary.utils.*
 import java.util.concurrent.TimeUnit
@@ -12,6 +12,7 @@ class GithubRepositoryImpl(
     private val usersApi: UsersApi,
     private val userDao: UserDAO,
     private val networkStatus: Single<Boolean>,
+    private val roomCache: Cacheable = RoomCache(userDao),
 ) : GithubRepository {
 
     override fun getUsers(): Single<List<GithubUser>> {
@@ -31,13 +32,9 @@ class GithubRepositoryImpl(
         }
     }
 
-    override fun checkStatusNetwork(): Single<Boolean> {
-       return networkStatus
-    }
-
     private fun getUsersApi(shouldPersist: Boolean): Single<List<GithubUser>> {
         return usersApi.getAllUsers().doCompletableIf(shouldPersist) {
-            userDao.insertAll(it.map(::mapToDBObject))
+            roomCache.insertUserList(it.map(::mapToDBObject))
         }.map { it.map(::mapToEntity) }
     }
 
@@ -68,7 +65,7 @@ class GithubRepositoryImpl(
             Pair<GithubUser, List<ReposDto>>(user,
                 repos.sortedByDescending { it.createdAt })
         }.doCompletableIf(true) { pair ->
-            userDao.insertAllRepos(pair.second.map {
+            roomCache.insertRepoList(pair.second.map {
                 mapReposToObject(it, pair.first.id)
             })
         }
