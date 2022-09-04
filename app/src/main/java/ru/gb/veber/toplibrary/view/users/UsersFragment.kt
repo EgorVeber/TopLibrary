@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -34,14 +35,6 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
             App.instance.router)
     }
 
-
-//    private val listener = object : ItemClickListener {
-//        override fun onUserClick(userLogin: String) {
-//            presenter.openUserScreen(userLogin)
-//        }
-//    }
-
-
     private lateinit var binding: FragmentUserListBinding
 
     companion object {
@@ -62,7 +55,6 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //userAdapter.setOnUserClickListener(listener)
         binding.rvGithubUser.adapter = userAdapter
         binding.rvGithubUser.layoutManager = LinearLayoutManager(requireContext())
     }

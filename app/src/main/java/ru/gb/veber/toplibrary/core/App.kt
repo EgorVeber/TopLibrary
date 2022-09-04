@@ -3,12 +3,10 @@ package ru.gb.veber.toplibrary.core
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import com.mirkhusainov.geekbrainscourse.core.utils.ConnetivityListener
-import ru.gb.veber.toplibrary.database.GithubDB
-import java.util.logging.LogManager
+import ru.gb.veber.toplibrary.model.database.GithubDB
 
 class App : Application() {
 

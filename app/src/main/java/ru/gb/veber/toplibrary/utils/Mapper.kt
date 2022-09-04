@@ -1,7 +1,7 @@
 package ru.gb.veber.toplibrary.utils
 
-import ru.gb.veber.toplibrary.database.RepoDBObject
-import ru.gb.veber.toplibrary.database.UserDbObject
+import ru.gb.veber.toplibrary.model.database.RepoDBObject
+import ru.gb.veber.toplibrary.model.database.UserDbObject
 import ru.gb.veber.toplibrary.model.data.GithubUser
 import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.model.data.UsersDto

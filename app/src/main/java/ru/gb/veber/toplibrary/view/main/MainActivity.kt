@@ -1,19 +1,11 @@
 package ru.gb.veber.toplibrary.view.main
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
-import com.bumptech.glide.manager.ConnectivityMonitor
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.mirkhusainov.geekbrainscourse.core.utils.ConnetivityListener
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.R
-import ru.gb.veber.toplibrary.core.AndroidNetworkStatus
 import ru.gb.veber.toplibrary.core.App
-import ru.gb.veber.toplibrary.database.RepoDBObject
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
 import ru.gb.veber.toplibrary.presenter.MainPresenter
 

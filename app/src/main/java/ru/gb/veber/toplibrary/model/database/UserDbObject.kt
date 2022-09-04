@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.database
+package ru.gb.veber.toplibrary.model.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

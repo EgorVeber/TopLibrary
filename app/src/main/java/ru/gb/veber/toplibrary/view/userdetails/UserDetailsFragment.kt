@@ -1,5 +1,6 @@
 package ru.gb.veber.toplibrary.view.userdetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -70,10 +71,12 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
 
     override fun onBackPressed() = presenter.onBackPressed()
 
+    @SuppressLint("SetTextI18n")
     override fun showUser(user: Pair<GithubUser, List<ReposDto>>) {
         TransitionManager.beginDelayedTransition(binding?.root)
         binding?.userName?.text = user.first.login
         binding?.ivUserAvatar?.loadGlide(user.first.avatarUrl)
+        binding?.userRepos?.text = "Repo:" + user.second.size.toString()
         reposAdapter.repos = user.second
     }
 
@@ -83,6 +86,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
             userName.hide()
             ivUserAvatar.hide()
             rvGithubUserRepos.hide()
+            userRepos.hide()
         }
     }
 
@@ -92,6 +96,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
             userName.show()
             ivUserAvatar.show()
             rvGithubUserRepos.show()
+            userRepos.show()
         }
     }
 

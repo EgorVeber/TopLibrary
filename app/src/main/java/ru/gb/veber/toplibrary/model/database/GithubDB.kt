@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.database
+package ru.gb.veber.toplibrary.model.database
 
 import android.content.Context
 import androidx.room.Database
