@@ -18,6 +18,7 @@ class UserDetailsPresenter(
 
     private val bag = CompositeDisposable()
     private var mLogin: String? = null
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
     }

@@ -13,7 +13,6 @@ import ru.gb.veber.toplibrary.core.AndroidNetworkStatus
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
 import ru.gb.veber.toplibrary.model.data.GithubUser
-import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.model.network.NetworkProvider
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
 import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
@@ -29,7 +28,6 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
     private val reposAdapter = ReposAdapter {
         presenter.openRepoScreen(it)
     }
-
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(App.instance.router,
@@ -63,21 +61,21 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
         arguments?.getString(KEY_USER)?.let {
             presenter.loadUser(it)
         }
-
         binding?.rvGithubUserRepos?.adapter = reposAdapter
         binding?.rvGithubUserRepos?.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
 
     @SuppressLint("SetTextI18n")
-    override fun showUser(user: Pair<GithubUser, List<ReposDto>>) {
+    override fun showUser(user: GithubUser) {
         TransitionManager.beginDelayedTransition(binding?.root)
-        binding?.userName?.text = user.first.login
-        binding?.ivUserAvatar?.loadGlide(user.first.avatarUrl)
-        binding?.userRepos?.text = "Repo:" + user.second.size.toString()
-        reposAdapter.repos = user.second
+        binding?.userName?.text = user.login
+        binding?.ivUserAvatar?.loadGlide(user.avatarUrl)
+        binding?.userRepos?.text = "Repo:" + user.repos?.size.toString()
+        user.repos?.let {
+            reposAdapter.repos = it
+        }
     }
 
     override fun showLoading() {
