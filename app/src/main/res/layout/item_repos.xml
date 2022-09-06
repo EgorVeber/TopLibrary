@@ -3,17 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?selectableItemBackground"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="10dp">
+
+
+
+    <TextView
+        android:id="@+id/nameRepoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/nameRepo"
-        android:textSize="18sp"
         android:layout_width="wrap_content"
-        tools:text="asdasd"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/languageRepo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="asdasd" />
+
+    <TextView
+        android:id="@+id/languageRepoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:text="Language:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nameRepoText"
+        />
+
+    <TextView
+        android:id="@+id/languageRepo"
+        android:layout_marginLeft="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/languageRepoText"
+        app:layout_constraintTop_toBottomOf="@+id/nameRepo"
+        tools:text="Kotlin" />
+
 
     <TextView
         android:id="@+id/dateCreating"
@@ -22,12 +60,13 @@
         tools:text="asdasd"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/languageRepo" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="5dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/nameRepo"
+        app:layout_constraintTop_toBottomOf="@+id/languageRepo"
         tools:layout_editor_absoluteX="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

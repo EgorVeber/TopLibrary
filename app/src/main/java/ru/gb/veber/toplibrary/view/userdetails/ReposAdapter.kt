@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.veber.toplibrary.databinding.ItemReposBinding
-import ru.gb.veber.toplibrary.network.ReposDto
+import ru.gb.veber.toplibrary.model.data.ReposDto
 
 
 typealias OnUserClickListener = (repo: ReposDto) -> Unit
@@ -44,6 +44,7 @@ class GithubUserReposViewHolder(
 
         dateCreating.text=item.createdAt
 
+        languageRepo.text=item.language
         root.setOnClickListener {
            onUserClickListener.invoke(item)
         }

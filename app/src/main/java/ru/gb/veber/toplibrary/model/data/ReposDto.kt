@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.network
+package ru.gb.veber.toplibrary.model.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -10,35 +10,35 @@ import kotlinx.android.parcel.Parcelize
 data class ReposDto(
     @Expose
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
 
     @Expose
     @SerializedName("node_id")
-    val nodeId: String,
+    val nodeId: String?=null,
 
     @Expose
     @SerializedName("name")
-    val name: String,
+    val name: String?=null,
 
     @Expose
     @SerializedName("description")
-    val description: String,
+    val description: String?=null,
 
     @Expose
     @SerializedName("created_at")
-    val createdAt: String,
+    var createdAt: String?=null,
 
     @Expose
     @SerializedName("updated_at")
-    val updatedAt: String,
+    val updatedAt: String?=null,
 
 
     @Expose
     @SerializedName("language")
-    val language: String,
+    val language: String?=null,
 
 
     @Expose
     @SerializedName("forks_count")
-    val forksCount: Int,
+    val forksCount: Int?=null,
 ) : Parcelable

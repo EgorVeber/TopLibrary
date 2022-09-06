@@ -17,6 +17,8 @@ class UsersPresenter(
         viewState.showLoading()
         repository.getUsers().subscribeByDefault()
             .subscribe({
+                Log.d("TAG", "subscribe")
+                Log.d("TAG", "${it.size}")
                 viewState.initList(it)
                 viewState.hideLoading()
             },

@@ -1,5 +1,6 @@
 package ru.gb.veber.toplibrary.view.userdetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -8,11 +9,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.gb.veber.toplibrary.core.AndroidNetworkStatus
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
-import ru.gb.veber.toplibrary.model.GithubUserRepos
+import ru.gb.veber.toplibrary.model.data.GithubUser
+import ru.gb.veber.toplibrary.model.network.NetworkProvider
 import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
-import ru.gb.veber.toplibrary.network.NetworkProvider
 import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.loadGlide
@@ -27,10 +29,10 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
         presenter.openRepoScreen(it)
     }
 
-
     private val presenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(App.instance.router,
-            GithubRepositoryImpl(NetworkProvider.usersApi))
+            GithubRepositoryImpl(NetworkProvider.usersApi, App.instance.database.userDao(),
+                AndroidNetworkStatus(requireContext()).isOnlineSingle()))
     }
 
     private var binding: FragmentUserScreenBinding? = null
@@ -59,34 +61,42 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
         arguments?.getString(KEY_USER)?.let {
             presenter.loadUser(it)
         }
-
         binding?.rvGithubUserRepos?.adapter = reposAdapter
         binding?.rvGithubUserRepos?.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
 
-    override fun showUser(user: GithubUserRepos) {
+    @SuppressLint("SetTextI18n")
+    override fun showUser(user: GithubUser) {
         TransitionManager.beginDelayedTransition(binding?.root)
-        binding?.userName?.text = user.user.login
-        binding?.ivUserAvatar?.loadGlide(user.user.avatarUrl)
-        reposAdapter.repos = user.reposList
+        binding?.userName?.text = user.login
+        binding?.ivUserAvatar?.loadGlide(user.avatarUrl)
+        binding?.userRepos?.text = "Repo:" + user.repos?.size.toString()
+        user.repos?.let {
+            reposAdapter.repos = it
+        }
     }
 
     override fun showLoading() {
+        TransitionManager.beginDelayedTransition(binding?.root)
         binding?.apply {
             progressBar.show()
             userName.hide()
             ivUserAvatar.hide()
+            rvGithubUserRepos.hide()
+            userRepos.hide()
         }
     }
 
     override fun hideLoading() {
+        TransitionManager.beginDelayedTransition(binding?.root)
         binding?.apply {
             progressBar.hide()
             userName.show()
             ivUserAvatar.show()
+            rvGithubUserRepos.show()
+            userRepos.show()
         }
     }
 

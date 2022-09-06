@@ -1,10 +1,13 @@
-package ru.gb.veber.toplibrary.network
+package ru.gb.veber.toplibrary.model.network
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.data.UsersDto
 
 interface UsersApi {
+
     @GET("/users")
     fun getAllUsers(): Single<List<UsersDto>>
 
@@ -13,5 +16,4 @@ interface UsersApi {
 
     @GET("/users/{login}/repos")
     fun getRepos(@Path("login") login: String): Single<List<ReposDto>>
-
 }
