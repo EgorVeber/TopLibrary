@@ -9,10 +9,10 @@ import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
 import ru.gb.veber.toplibrary.presenter.MainPresenter
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView{
 
     private lateinit var binding: ActivityMainBinding
-    private val navigator = AppNavigator(this, R.id.container)
+    private val navigator = AppNavigator(this, R.id.containerMain)
 
     private val presenter by moxyPresenter { MainPresenter(App.instance.router) }
 
@@ -21,7 +21,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
- //      var db = App.instance.database.userDao()
+
+
+
+
+        //      var db = App.instance.database.userDao()
 //
 ////        Log.d("DBTEST", "it.toString()")
 //        db.queryForAllUsers().subscribeOn(Schedulers.io()).subscribe({
@@ -91,4 +95,5 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
         presenter.onBackPressed()
     }
+
 }
