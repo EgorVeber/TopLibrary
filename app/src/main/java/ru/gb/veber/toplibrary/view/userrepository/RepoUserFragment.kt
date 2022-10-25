@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentRepoUserBinding
 import ru.gb.veber.toplibrary.model.data.ReposDto
 import ru.gb.veber.toplibrary.presenter.RepoUserPresenter
@@ -15,7 +14,7 @@ import ru.gb.veber.toplibrary.view.main.BackPressedListener
 class RepoUserFragment : MvpAppCompatFragment(), RepoUserView, BackPressedListener {
 
     private val presenter: RepoUserPresenter by moxyPresenter {
-        RepoUserPresenter(App.instance.router, arguments?.getParcelable(KEY_REPO))
+        RepoUserPresenter(arguments?.getParcelable(KEY_REPO))
     }
 
     private lateinit var binding: FragmentRepoUserBinding

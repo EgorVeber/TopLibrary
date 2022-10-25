@@ -15,7 +15,6 @@ object NetworkProvider {
 
     fun createGson() =
         GsonBuilder()
-//        setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .excludeFieldsWithoutExposeAnnotation()
             .create()
 

@@ -1,4 +1,4 @@
-package com.mirkhusainov.geekbrainscourse.core.utils
+package ru.gb.veber.toplibrary.core
 
 import android.net.ConnectivityManager
 import android.net.Network
@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
-class ConnetivityListener(connectivityManager: ConnectivityManager) {
+class ConnectivityListener(connectivityManager: ConnectivityManager) {
 
     private val subject = BehaviorSubject.create<Boolean>()
 
