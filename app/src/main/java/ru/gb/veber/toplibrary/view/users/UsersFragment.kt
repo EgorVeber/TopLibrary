@@ -9,12 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.core.AndroidNetworkStatus
-import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
 import ru.gb.veber.toplibrary.model.data.GithubUser
-import ru.gb.veber.toplibrary.model.network.NetworkProvider
-import ru.gb.veber.toplibrary.model.repository.GithubRepositoryImpl
 import ru.gb.veber.toplibrary.presenter.UsersPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.show
@@ -28,10 +24,7 @@ class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubRepositoryImpl(NetworkProvider.usersApi,
-            App.instance.database.userDao(),
-            AndroidNetworkStatus(requireContext()).isOnlineSingle()),
-            App.instance.router)
+        UsersPresenter()
     }
 
     private lateinit var binding: FragmentUserListBinding

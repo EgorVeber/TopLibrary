@@ -7,7 +7,6 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 abstract class UserDAO {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertAll(userDbObject: List<UserDbObject>): Completable
 
@@ -23,18 +22,5 @@ abstract class UserDAO {
     @Transaction
     @Query("Select * from users where login =:login")
     abstract fun getUsersWithRepos(login: String): Single<UserWithReposDBObject>
-
-
-//    @Query("Delete from repos")
-//    abstract fun deleteAllRepos(): Completable
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    abstract fun insert(userDbObject: UserDbObject): Completable
-
-//    @Query("DELETE  from repos")
-//    abstract fun queryForTest(): Completable
-
-//    @Delete
-//    abstract fun delete(userDbObject: UserDbObject): Completable
 
 }

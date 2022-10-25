@@ -9,19 +9,15 @@ import ru.gb.veber.toplibrary.model.repository.GithubRepository
 import ru.gb.veber.toplibrary.utils.disposebleBy
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView
+import javax.inject.Inject
 
-class UserDetailsPresenter(
-    private val router: Router,
-    private val repository: GithubRepository,
-) : MvpPresenter<UserDetailsView>() {
+class UserDetailsPresenter() : MvpPresenter<UserDetailsView>() {
 
+    @Inject lateinit var repository: GithubRepository
+    @Inject lateinit var router: Router
 
     private val bag = CompositeDisposable()
     private var mLogin: String? = null
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-    }
 
     fun loadUser(login: String) {
         mLogin = login

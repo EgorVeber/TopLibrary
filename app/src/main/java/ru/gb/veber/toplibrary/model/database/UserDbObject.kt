@@ -12,8 +12,6 @@ data class UserDbObject(
     var login: String,
     val avatarUrl: String,
     val reposUrl: String,
-//    @Ignore
-//    var repos:List<RepoDBObject>
 ){
     companion object{
         const val PRIMARY_KEY = "id"
