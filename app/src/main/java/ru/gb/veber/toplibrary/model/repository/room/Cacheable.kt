@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.model.repository
+package ru.gb.veber.toplibrary.model.repository.room
 
 import io.reactivex.rxjava3.core.Completable
 import ru.gb.veber.toplibrary.model.database.entity.UserRepoDbEntity

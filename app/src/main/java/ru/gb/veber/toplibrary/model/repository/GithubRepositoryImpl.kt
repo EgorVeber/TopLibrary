@@ -3,19 +3,20 @@ package ru.gb.veber.toplibrary.model.repository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import ru.gb.veber.toplibrary.model.GithubUser
-import ru.gb.veber.toplibrary.model.database.dao.UserRepoDao
-import ru.gb.veber.toplibrary.model.database.dao.UsersDao
 import ru.gb.veber.toplibrary.model.network.ReposDto
 import ru.gb.veber.toplibrary.model.repository.network.GithubApiRepo
+import ru.gb.veber.toplibrary.model.repository.room.Cacheable
+import ru.gb.veber.toplibrary.model.repository.room.UserRepositoryRepo
+import ru.gb.veber.toplibrary.model.repository.room.UsersRepo
 import ru.gb.veber.toplibrary.utils.*
 import java.util.concurrent.TimeUnit
 
 class GithubRepositoryImpl(
     private val githubApiRepo: GithubApiRepo,
-    private val usersDao: UsersDao,
+    private val usersRepo: UsersRepo,
+    private val userRepositoryRepo: UserRepositoryRepo,
     private val networkStatus: Single<Boolean>,
     private val roomCache: Cacheable,
-    private val userRepoDao: UserRepoDao,
 ) : GithubRepository {
 
     override fun getUsers(): Single<List<GithubUser>> {
@@ -32,7 +33,7 @@ class GithubRepositoryImpl(
     }
 
     private fun getUsersBD(): Single<List<GithubUser>> {
-        return usersDao.queryForAllUsers().map { it.map(::mapToEntity) }
+        return usersRepo.queryForAllUsers().map { it.map(::mapToEntity) }
     }
 
 
@@ -48,7 +49,7 @@ class GithubRepositoryImpl(
 
 
     private fun getUserWithReposBD(login: String): Single<GithubUser> {
-        return userRepoDao.getUsersWithRepos(login).map { userWithRepos ->
+        return userRepositoryRepo.getUsersWithRepos(login).map { userWithRepos ->
             val user = mapToEntity(userWithRepos.usersDbEntity)
             user.repos = userWithRepos.repos.map {
                 it.createdAt = it.createdAt?.substring(0, 10)
