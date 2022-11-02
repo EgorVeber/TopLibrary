@@ -1,4 +1,5 @@
 package ru.gb.veber.toplibrary.di
+
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -21,5 +22,4 @@ object NavigationModule {
     @Singleton
     @Provides
     fun router(): Router = cicerone.router
-
 }

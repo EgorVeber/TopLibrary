@@ -3,7 +3,7 @@ package ru.gb.veber.toplibrary.di
 import dagger.Module
 import dagger.Provides
 import ru.gb.veber.toplibrary.core.ConnectivityListener
-import ru.gb.veber.toplibrary.model.database.UserDAO
+import ru.gb.veber.toplibrary.model.database.dao.UsersDao
 import ru.gb.veber.toplibrary.model.network.UsersApi
 import ru.gb.veber.toplibrary.model.repository.Cacheable
 import ru.gb.veber.toplibrary.model.repository.GithubRepository
@@ -18,10 +18,10 @@ object RepositoryModule {
     @Singleton
     fun provideUserRepository(
         usersApi: UsersApi,
-        userDao: UserDAO,
+        usersDao: UsersDao,
         networkStatus: ConnectivityListener,
         cacheable: Cacheable,
     ): GithubRepository {
-        return GithubRepositoryImpl(usersApi, userDao, networkStatus.statusSingle(), cacheable)
+        return GithubRepositoryImpl(usersApi, usersDao, networkStatus.statusSingle(), cacheable)
     }
 }

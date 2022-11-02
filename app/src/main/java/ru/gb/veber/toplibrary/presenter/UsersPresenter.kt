@@ -1,6 +1,5 @@
 package ru.gb.veber.toplibrary.presenter
 
-import android.util.Log
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import ru.gb.veber.toplibrary.core.App
@@ -11,8 +10,11 @@ import javax.inject.Inject
 
 class UsersPresenter() : MvpPresenter<UserView>() {
 
-    @Inject lateinit var repository: GithubRepository
-    @Inject lateinit var router: Router
+    @Inject
+    lateinit var repository: GithubRepository
+
+    @Inject
+    lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -21,14 +23,11 @@ class UsersPresenter() : MvpPresenter<UserView>() {
         viewState.showLoading()
         repository.getUsers().subscribeByDefault()
             .subscribe({
-                Log.d("TAG", "subscribe")
-                Log.d("TAG", "${it.size}")
                 viewState.initList(it)
                 viewState.hideLoading()
-            },
-                {
-                    viewState.errorGetUser(it.message)
-                })
+            }, {
+                viewState.errorGetUser(it.message)
+            })
     }
 
     fun openUserScreen(userLogin: String) {

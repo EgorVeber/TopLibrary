@@ -1,23 +1,15 @@
-package ru.gb.veber.toplibrary.model.database
+package ru.gb.veber.toplibrary.model.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-//Старый способ
-//@Entity(tableName = "repos", foreignKeys =
-//[ForeignKey(
-//    entity = UserDbObject::class,
-//    parentColumns = ["id"],
-//    childColumns = ["userId"],
-//    onDelete = ForeignKey.CASCADE
-//)])
 
 @Entity(tableName = "repos")
-data class RepoDBObject(
+data class UserRepoDbEntity(
     @PrimaryKey
-    @ColumnInfo(name = PRIMARY_KEY) // можно менять название
+    @ColumnInfo(name = PRIMARY_KEY)
     val id: Int,
     val forks: Int?=null,
     val name: String?=null,

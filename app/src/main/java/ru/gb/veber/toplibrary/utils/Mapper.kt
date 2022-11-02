@@ -1,10 +1,10 @@
 package ru.gb.veber.toplibrary.utils
 
-import ru.gb.veber.toplibrary.model.data.GithubUser
-import ru.gb.veber.toplibrary.model.data.ReposDto
-import ru.gb.veber.toplibrary.model.data.UsersDto
-import ru.gb.veber.toplibrary.model.database.RepoDBObject
-import ru.gb.veber.toplibrary.model.database.UserDbObject
+import ru.gb.veber.toplibrary.model.GithubUser
+import ru.gb.veber.toplibrary.model.database.entity.UserRepoDbEntity
+import ru.gb.veber.toplibrary.model.database.entity.UsersDbEntity
+import ru.gb.veber.toplibrary.model.network.ReposDto
+import ru.gb.veber.toplibrary.model.network.UsersDto
 
 
 fun mapToEntity(dto: UsersDto): GithubUser {
@@ -14,8 +14,8 @@ fun mapToEntity(dto: UsersDto): GithubUser {
         reposUrl = dto.reposUrl)
 }
 
-fun mapToDBObject(dto: UsersDto): UserDbObject {
-    return UserDbObject(
+fun mapToDBObject(dto: UsersDto): UsersDbEntity {
+    return UsersDbEntity(
         id = dto.id,
         login = dto.login,
         avatarUrl = dto.avatarUrl,
@@ -23,14 +23,14 @@ fun mapToDBObject(dto: UsersDto): UserDbObject {
     )
 }
 
-fun mapToEntity(userDbObject: UserDbObject): GithubUser {
-    return GithubUser(id = userDbObject.id,
-        login = userDbObject.login,
-        avatarUrl = userDbObject.avatarUrl,
-        reposUrl = userDbObject.reposUrl)
+fun mapToEntity(usersDbEntity: UsersDbEntity): GithubUser {
+    return GithubUser(id = usersDbEntity.id,
+        login = usersDbEntity.login,
+        avatarUrl = usersDbEntity.avatarUrl,
+        reposUrl = usersDbEntity.reposUrl)
 }
 
-fun mapRepos(repoDto: RepoDBObject): ReposDto {
+fun mapRepos(repoDto: UserRepoDbEntity): ReposDto {
     return ReposDto(
         id = repoDto.id,
         forksCount = repoDto.forks,
@@ -43,8 +43,8 @@ fun mapRepos(repoDto: RepoDBObject): ReposDto {
     )
 }
 
-fun mapReposToObject(repoDto: ReposDto, mUserId: Int): RepoDBObject {
-    return RepoDBObject(
+fun mapReposToObject(repoDto: ReposDto, mUserId: Int): UserRepoDbEntity {
+    return UserRepoDbEntity(
         id = repoDto.id,
         forks = repoDto.forksCount,
         name = repoDto.name,

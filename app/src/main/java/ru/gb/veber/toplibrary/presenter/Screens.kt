@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.network.ReposDto
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsFragment
 import ru.gb.veber.toplibrary.view.userrepository.RepoUserFragment
 import ru.gb.veber.toplibrary.view.userrepository.RepoUserFragment.Companion.KEY_REPO

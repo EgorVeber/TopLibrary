@@ -2,13 +2,15 @@ package ru.gb.veber.toplibrary.model.database
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import ru.gb.veber.toplibrary.model.database.entity.UserRepoDbEntity
+import ru.gb.veber.toplibrary.model.database.entity.UsersDbEntity
 
 data class UserWithReposDBObject(
-    @Embedded //распарсится на поля
-    val userDbObject: UserDbObject,
+    @Embedded
+    val usersDbEntity: UsersDbEntity,
     @Relation(
-        parentColumn = UserDbObject.PRIMARY_KEY,
-        entityColumn = RepoDBObject.FOREIGN_USER_KEY
+        parentColumn = UsersDbEntity.PRIMARY_KEY,
+        entityColumn = UserRepoDbEntity.FOREIGN_USER_KEY
     )
-    val repos: List<RepoDBObject>,
+    val repos: List<UserRepoDbEntity>,
 )

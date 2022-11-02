@@ -1,11 +1,11 @@
-package ru.gb.veber.toplibrary.model.database
+package ru.gb.veber.toplibrary.model.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
-data class UserDbObject(
+data class UsersDbEntity(
     @PrimaryKey
     @ColumnInfo(name = PRIMARY_KEY)
     val id: Int,

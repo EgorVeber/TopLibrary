@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.databinding.FragmentRepoUserBinding
-import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.network.ReposDto
 import ru.gb.veber.toplibrary.presenter.RepoUserPresenter
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
 

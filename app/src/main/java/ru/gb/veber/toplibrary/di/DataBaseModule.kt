@@ -3,7 +3,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.gb.veber.toplibrary.model.database.GithubDB
-import ru.gb.veber.toplibrary.model.database.UserDAO
+import ru.gb.veber.toplibrary.model.database.dao.UsersDao
 import javax.inject.Singleton
 
 @Module
@@ -16,6 +16,6 @@ object DataBaseModule {
 
     @Singleton
     @Provides
-    fun userDao(database: GithubDB): UserDAO =
-        database.userDao()
+    fun userDao(database: GithubDB): UsersDao =
+        database.usersDao()
 }
