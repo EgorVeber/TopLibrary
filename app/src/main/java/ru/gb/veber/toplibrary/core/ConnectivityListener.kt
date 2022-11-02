@@ -3,7 +3,6 @@ package ru.gb.veber.toplibrary.core
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
@@ -27,8 +26,6 @@ class ConnectivityListener(connectivityManager: ConnectivityManager) {
             }
         })
     }
-
-    fun status(): Observable<Boolean> = subject
 
     fun statusSingle(): Single<Boolean> = subject.first(false)
 }
