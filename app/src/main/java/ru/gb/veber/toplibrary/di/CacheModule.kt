@@ -5,9 +5,11 @@ import dagger.Provides
 import ru.gb.veber.toplibrary.model.database.UserDAO
 import ru.gb.veber.toplibrary.model.repository.Cacheable
 import ru.gb.veber.toplibrary.model.repository.RoomCache
+import javax.inject.Singleton
 
 @Module
-class CacheModule {
+object CacheModule {
+    @Singleton
     @Provides
     fun cacheable(userDAO: UserDAO): Cacheable {
         return RoomCache(userDAO)
