@@ -4,14 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.gb.veber.toplibrary.model.database.GithubDB
-import ru.gb.veber.toplibrary.model.database.dao.UserRepoDao
-import ru.gb.veber.toplibrary.model.database.dao.UsersDao
-import ru.gb.veber.toplibrary.model.repository.room.Cacheable
-import ru.gb.veber.toplibrary.model.repository.room.CacheableImpl
-import ru.gb.veber.toplibrary.model.repository.room.UserRepositoryRepo
-import ru.gb.veber.toplibrary.model.repository.room.UserRepositoryRepoImpl
-import ru.gb.veber.toplibrary.model.repository.room.UsersRepo
-import ru.gb.veber.toplibrary.model.repository.room.UsersRepoImpl
+import ru.gb.veber.toplibrary.model.repository.room.*
 import javax.inject.Singleton
 
 @Module

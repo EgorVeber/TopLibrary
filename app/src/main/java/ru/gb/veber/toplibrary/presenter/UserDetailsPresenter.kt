@@ -5,7 +5,8 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import ru.gb.veber.toplibrary.model.network.ReposDto
-import ru.gb.veber.toplibrary.model.repository.GithubRepository
+import ru.gb.veber.toplibrary.model.repository.screen.UserDetailsRepoScreen
+import ru.gb.veber.toplibrary.model.repository.screen.UsersRepoScreen
 import ru.gb.veber.toplibrary.utils.disposebleBy
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView
@@ -13,8 +14,10 @@ import javax.inject.Inject
 
 class UserDetailsPresenter() : MvpPresenter<UserDetailsView>() {
 
-    @Inject lateinit var repository: GithubRepository
-    @Inject lateinit var router: Router
+    @Inject
+    lateinit var repository: UserDetailsRepoScreen
+    @Inject
+    lateinit var router: Router
 
     private val bag = CompositeDisposable()
     private var mLogin: String? = null
