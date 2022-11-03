@@ -5,5 +5,4 @@ import ru.gb.veber.toplibrary.model.GithubUser
 
 interface UserDetailsRepoScreen {
     fun getUserWithReposByLogin(login: String): Single<GithubUser>
-
 }

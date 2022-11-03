@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserScreenBinding
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.presenter.UserDetailsPresenter
@@ -21,15 +20,12 @@ import ru.gb.veber.toplibrary.view.main.BackPressedListener
 
 class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressedListener {
 
-
     private val reposAdapter = ReposAdapter {
         presenter.openRepoScreen(it)
     }
 
     private val presenter: UserDetailsPresenter by moxyPresenter {
-        UserDetailsPresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
+        UserDetailsPresenter(arguments?.getString(KEY_USER))
     }
 
     private var binding: FragmentUserScreenBinding? = null
@@ -55,9 +51,6 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString(KEY_USER)?.let {
-            presenter.loadUser(it)
-        }
         binding?.rvGithubUserRepos?.adapter = reposAdapter
         binding?.rvGithubUserRepos?.layoutManager = LinearLayoutManager(requireContext())
     }

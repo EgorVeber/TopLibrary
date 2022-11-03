@@ -1,9 +1,7 @@
 package ru.gb.veber.toplibrary.core
 
 import android.app.Application
-import ru.gb.veber.toplibrary.di.AppComponent
-import ru.gb.veber.toplibrary.di.AppModule
-import ru.gb.veber.toplibrary.di.DaggerAppComponent
+import ru.gb.veber.toplibrary.di.*
 
 class App : Application() {
 
@@ -13,6 +11,7 @@ class App : Application() {
 
     lateinit var appComponent: AppComponent
 
+
     override fun onCreate() {
         super.onCreate()
 
@@ -21,4 +20,5 @@ class App : Application() {
             .appModule(AppModule(applicationContext))
             .build()
     }
+
 }

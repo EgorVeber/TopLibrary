@@ -10,11 +10,7 @@ import ru.gb.veber.toplibrary.model.repository.screen.UsersRepoScreen
 import ru.gb.veber.toplibrary.model.repository.screen.UsersRepoScreenImpl
 import javax.inject.Singleton
 
-//@Scope
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class UsersScreenRepoScope
-
-@Module
+@Module()
 object UsersScreenModule {
     @Provides
     @Singleton
@@ -33,14 +29,4 @@ object UsersScreenModule {
     }
 }
 
-//@UsersScreenRepoScope
-//@Subcomponent(
-//    modules = [
-//        UsersScreenModule::class
-//    ]
-//)
-//interface RepositorySubcomponent {
-//    fun inject(userPresenter: UserPresenter)
-//    fun inject(repositoryPresenter: RepositoryPresenter)
-//}
-//
+
