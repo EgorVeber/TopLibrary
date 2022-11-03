@@ -1,4 +1,4 @@
-package ru.gb.veber.toplibrary.model.data
+package ru.gb.veber.toplibrary.model.network
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -32,13 +32,30 @@ data class ReposDto(
     @SerializedName("updated_at")
     val updatedAt: String?=null,
 
-
     @Expose
     @SerializedName("language")
     val language: String?=null,
 
-
     @Expose
     @SerializedName("forks_count")
     val forksCount: Int?=null,
+) : Parcelable
+
+@Parcelize
+data class UsersDto(
+    @Expose
+    @SerializedName("id")
+    val id: Int,
+
+    @Expose
+    @SerializedName("login")
+    val login: String,
+
+    @Expose
+    @SerializedName("avatar_url")
+    val avatarUrl: String,
+
+    @Expose
+    @SerializedName("repos_url")
+    val reposUrl: String,
 ) : Parcelable

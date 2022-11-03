@@ -3,7 +3,7 @@ package ru.gb.veber.toplibrary.presenter
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import ru.gb.veber.toplibrary.core.App
-import ru.gb.veber.toplibrary.model.data.ReposDto
+import ru.gb.veber.toplibrary.model.network.ReposDto
 import ru.gb.veber.toplibrary.view.userrepository.RepoUserView
 import javax.inject.Inject
 

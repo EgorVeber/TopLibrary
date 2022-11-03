@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.veber.toplibrary.databinding.ItemUserBinding
-import ru.gb.veber.toplibrary.model.data.GithubUser
+import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.utils.loadGlide
 
 

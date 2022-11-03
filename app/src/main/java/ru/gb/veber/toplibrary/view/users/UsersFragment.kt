@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
-import ru.gb.veber.toplibrary.model.data.GithubUser
+import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.presenter.UsersPresenter
 import ru.gb.veber.toplibrary.utils.hide
 import ru.gb.veber.toplibrary.utils.show
 import ru.gb.veber.toplibrary.view.main.BackPressedListener
+
 
 class UsersFragment : MvpAppCompatFragment(), UserView, BackPressedListener {
 
