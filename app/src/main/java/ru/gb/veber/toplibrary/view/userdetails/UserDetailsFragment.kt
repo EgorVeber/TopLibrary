@@ -53,6 +53,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackPressed
         super.onViewCreated(view, savedInstanceState)
         binding?.rvGithubUserRepos?.adapter = reposAdapter
         binding?.rvGithubUserRepos?.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

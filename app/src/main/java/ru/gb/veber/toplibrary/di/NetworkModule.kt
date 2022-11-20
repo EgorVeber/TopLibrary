@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +15,6 @@ import ru.gb.veber.toplibrary.core.ConnectivityListener
 import ru.gb.veber.toplibrary.model.network.GithubApi
 import javax.inject.Named
 import javax.inject.Singleton
-
 @Module
 object NetworkModule {
 
@@ -30,6 +30,7 @@ object NetworkModule {
             .create(GithubApi::class.java)
 
     @Named("baseUrl")
+    @Singleton
     @Provides
     fun provideBaseUrl(): String = "https://api.github.com/"
 
@@ -42,12 +43,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun client() = OkHttpClient.Builder().addInterceptor { chain ->
+    fun client() = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .addInterceptor { chain ->
         val request = chain.request()
         val url = request.url.newBuilder().build()
         chain.proceed(request.newBuilder().url(url).build())
     }.build()
-
 
     @Singleton
     @Provides

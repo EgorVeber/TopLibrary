@@ -8,7 +8,6 @@ import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.di.RepositorySubcomponent
 import ru.gb.veber.toplibrary.model.network.ReposDto
 import ru.gb.veber.toplibrary.model.repository.screen.UserDetailsRepoScreen
-import ru.gb.veber.toplibrary.model.repository.screen.UsersRepoScreen
 import ru.gb.veber.toplibrary.utils.disposebleBy
 import ru.gb.veber.toplibrary.utils.subscribeByDefault
 import ru.gb.veber.toplibrary.view.userdetails.UserDetailsView

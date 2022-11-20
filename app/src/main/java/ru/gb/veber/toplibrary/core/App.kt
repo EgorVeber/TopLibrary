@@ -1,7 +1,9 @@
 package ru.gb.veber.toplibrary.core
 
 import android.app.Application
-import ru.gb.veber.toplibrary.di.*
+import ru.gb.veber.toplibrary.di.AppComponent
+import ru.gb.veber.toplibrary.di.AppModule
+import ru.gb.veber.toplibrary.di.DaggerAppComponent
 
 class App : Application() {
 

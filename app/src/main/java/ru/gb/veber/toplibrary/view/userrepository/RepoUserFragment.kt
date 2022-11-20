@@ -44,6 +44,10 @@ class RepoUserFragment : MvpAppCompatFragment(), RepoUserView, BackPressedListen
         updatedAt.text = repo.updatedAt
         language.text = repo.language
         forksCount.text = repo.forksCount.toString()
+
+        parentFragmentManager.setFragmentResult("REQUEST_KEY", Bundle().apply {
+            putString("KEY", "VALUE")
+        })
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

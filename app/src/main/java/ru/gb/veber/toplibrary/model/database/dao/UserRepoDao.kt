@@ -18,4 +18,4 @@ abstract class UserRepoDao {
     @Transaction
     @Query("Select * from users where login =:login")
     abstract fun getUsersWithRepos(login: String): Single<UserWithReposDBObject>
-}
+} 

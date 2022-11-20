@@ -1,6 +1,7 @@
 package ru.gb.veber.toplibrary.view.main
 
 import android.os.Bundle
+import android.util.Log
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
@@ -19,15 +20,24 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val presenter by moxyPresenter { MainPresenter().apply {
-        App.instance.appComponent.inject(this)
-    } }
+
+
+    private val presenter by moxyPresenter {
+        MainPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        supportFragmentManager.setFragmentResultListener("REQUEST_KEY", this) { _, bundle ->
+            bundle.getString("KEY")
+        }
     }
 
     override fun onResumeFragments() {
@@ -48,5 +58,19 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
         presenter.onBackPressed()
+    }
+}
+
+abstract class TestMy {
+    abstract fun getDate()
+    fun getDate2() {
+        Log.d("TAG", "getDate2() called")
+    }
+}
+
+interface TestMy2 {
+    fun getDate()
+    fun getDate2() {
+        Log.d("TAG", "getDate2() called")
     }
 }

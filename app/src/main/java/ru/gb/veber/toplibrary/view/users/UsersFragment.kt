@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.FragmentUserListBinding
 import ru.gb.veber.toplibrary.model.GithubUser
 import ru.gb.veber.toplibrary.presenter.UsersPresenter

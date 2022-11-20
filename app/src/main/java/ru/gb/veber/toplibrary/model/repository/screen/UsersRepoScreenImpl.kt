@@ -15,6 +15,7 @@ class UsersRepoScreenImpl(
     private val networkStatus: Single<Boolean>,
     private val roomCache: Cacheable,
 ) : UsersRepoScreen {
+
     override fun getUsers(): Single<List<GithubUser>> {
         return networkStatus.flatMap { hasConnection ->
             if (hasConnection) getUsersApi(true)
