@@ -14,4 +14,8 @@ interface GithubApi {
 
     @GET("/users/{login}/repos")
     fun getRepos(@Path("login") login: String): Single<List<ReposDto>>
+
+
+    @GET("/users")
+    suspend fun getCoroutineUsers(): List<UsersDto>
 }

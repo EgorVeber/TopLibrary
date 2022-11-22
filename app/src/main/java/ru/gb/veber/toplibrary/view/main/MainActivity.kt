@@ -9,6 +9,9 @@ import moxy.ktx.moxyPresenter
 import ru.gb.veber.toplibrary.R
 import ru.gb.veber.toplibrary.core.App
 import ru.gb.veber.toplibrary.databinding.ActivityMainBinding
+import ru.gb.veber.toplibrary.model.network.GithubApi
+import ru.gb.veber.toplibrary.model.repository.network.GithubApiRepo
+import ru.gb.veber.toplibrary.model.repository.network.GithubApiRepoImpl
 import ru.gb.veber.toplibrary.presenter.MainPresenter
 import javax.inject.Inject
 
@@ -19,7 +22,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
-
 
 
     private val presenter by moxyPresenter {
@@ -34,10 +36,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        supportFragmentManager.setFragmentResultListener("REQUEST_KEY", this) { _, bundle ->
-            bundle.getString("KEY")
-        }
     }
 
     override fun onResumeFragments() {

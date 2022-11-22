@@ -17,4 +17,8 @@ class GithubApiRepoImpl(private val githubApi: GithubApi) : GithubApiRepo {
     override fun getRepos(login: String): Single<List<ReposDto>> {
         return githubApi.getRepos(login)
     }
+
+    override suspend fun getCoroutineUsers(): List<UsersDto> {
+        return githubApi.getCoroutineUsers()
+    }
 }
